@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .admin-sidebar { background: linear-gradient(180deg, #1e3a8a 0%, #312e81 100%); }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar w-64 text-white flex-shrink-0 hidden md:flex flex-col">
+            <div class="p-6 border-b border-white/10">
+                <h1 class="font-bold text-lg">لوحة التحكم</h1>
+                <p class="text-xs text-white/60">منطقة المنشئ</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/10">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات العامة</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>المظهر والتصميم</span>
+                </a>
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>العودة للموقع</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">إعدادات الموقع</h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">معلومات الموقع</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">اسم الموقع</label>
+                        <input type="text" value="منصة الطالب" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">اللون الأساسي</label>
+                        <input type="color" value="#2563eb" class="w-20 h-12 rounded-lg">
+                    </div>
+                    <button class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all">
+                        حفظ التغييرات
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
