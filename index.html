@@ -19,8 +19,6 @@
         body { font-family: 'Cairo', sans-serif; }
         .resource-card { transition: all 0.3s ease; }
         .resource-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -39,26 +37,17 @@
                 </div>
                 
                 <div class="flex items-center gap-3">
-                    <span id="user-status" class="text-sm text-gray-600 dark:text-gray-400 hidden"></span>
                     <button onclick="toggleDarkMode()" class="p-2 rounded-lg text-gray-600 dark:text-gray-400">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:block"></i>
                     </button>
-                    <button id="auth-btn" onclick="openAuthModal()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    <button onclick="openAuthModal()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
                         تسجيل الدخول
                     </button>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- Loading State -->
-    <div id="loading" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex items-center justify-center">
-        <div class="text-center">
-            <div class="loading mb-4"></div>
-            <p class="text-gray-600 dark:text-gray-400">جاري التحميل...</p>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-32">
@@ -71,6 +60,11 @@
                 <p class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
                     اكتشف أفضل الأدوات والموارد والمصادر المفيدة للجامعيين
                 </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#categories" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all">
+                        استكشف المصادر
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -80,12 +74,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">تصنيفات المصادر</h2>
+                <p class="text-gray-600 dark:text-gray-400">اختر التصنيف المناسب لاحتياجاتك</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="categories-grid">
-                <!-- Loading -->
-                <div class="col-span-4 text-center py-12">
-                    <div class="loading"></div>
-                </div>
+                <!-- Categories will be loaded here -->
             </div>
         </div>
     </section>
@@ -95,18 +87,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">جميع المصادر</h2>
-                <div class="flex flex-wrap justify-center gap-3 mt-8" id="filter-buttons">
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
                     <button onclick="filterResources('all')" class="filter-btn active px-6 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">الكل</button>
+                    <button onclick="filterResources('academic')" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700">أكاديمي</button>
+                    <button onclick="filterResources('productivity')" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700">إنتاجية</button>
+                    <button onclick="filterResources('tech')" class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700">تقنية</button>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="resources-grid">
-                <!-- Loading -->
-                <div class="col-span-4 text-center py-12">
-                    <div class="loading"></div>
-                </div>
+                <!-- Resources will be loaded here -->
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>© 2024 منصة الطالب. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 
     <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
@@ -117,15 +116,46 @@
                 <input type="password" id="login-password" placeholder="كلمة المرور" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                 <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold">تسجيل الدخول</button>
             </form>
-            <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-                ليس لديك حساب؟ <a href="#" onclick="showSignup()" class="text-blue-600 hover:underline">سجل الآن</a>
-            </p>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/supabase.js"></script>
+    <!-- JavaScript -->
     <script>
+        // ==========================================
+        // Supabase Configuration - استبدل هنا
+        // ==========================================
+        const SUPABASE_URL = 'https://your-project.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+        
+        let supabase;
+        try {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            console.log('✅ Supabase connected');
+        } catch (error) {
+            console.error('❌ Supabase error:', error);
+        }
+
+        // ==========================================
+        // Sample Data (إذا فشل الاتصال بـ Supabase)
+        // ==========================================
+        const sampleCategories = [
+            { id: 1, name: 'مصادر أكاديمية', icon: 'fa-book', color: 'from-blue-500 to-blue-600' },
+            { id: 2, name: 'إنتاجية وتنظيم', icon: 'fa-tasks', color: 'from-green-500 to-green-600' },
+            { id: 3, name: 'برمجة وتقنية', icon: 'fa-code', color: 'from-purple-500 to-purple-600' },
+            { id: 4, name: 'تصميم وإبداع', icon: 'fa-palette', color: 'from-pink-500 to-pink-600' }
+        ];
+
+        const sampleResources = [
+            { id: 1, name: 'Google Scholar', category_id: 1, description: 'محرك بحث أكاديمي', url: 'https://scholar.google.com', icon: 'https://scholar.google.com/favicon.ico', rating: 4.9, views: 15000 },
+            { id: 2, name: 'Notion', category_id: 2, description: 'منصة تنظيم الملاحظات', url: 'https://notion.so', icon: 'https://www.notion.so/favicon.ico', rating: 4.8, views: 12000 },
+            { id: 3, name: 'GitHub', category_id: 3, description: 'استضافة الكود', url: 'https://github.com', icon: 'https://github.com/favicon.ico', rating: 4.9, views: 20000 },
+            { id: 4, name: 'Canva', category_id: 4, description: 'تصميم رسومي', url: 'https://canva.com', icon: 'https://www.canva.com/favicon.ico', rating: 4.7, views: 18000 }
+        ];
+
+        // ==========================================
+        // Functions
+        // ==========================================
+        
         // Dark Mode
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
@@ -136,87 +166,94 @@
             document.documentElement.classList.add('dark');
         }
 
-        // Load Data from Supabase
-        async function loadData() {
+        // Load Categories
+        async function loadCategories() {
             try {
-                // Load categories
-                const categories = await window.db.getCategories();
-                renderCategories(categories);
+                let categories;
                 
-                // Load resources
-                const resources = await window.db.getResources();
-                renderResources(resources);
+                if (supabase) {
+                    const { data, error } = await supabase.from('categories').select('*');
+                    if (!error && data && data.length > 0) {
+                        categories = data;
+                    } else {
+                        categories = sampleCategories;
+                    }
+                } else {
+                    categories = sampleCategories;
+                }
                 
-                // Hide loading
-                document.getElementById('loading').style.display = 'none';
+                const grid = document.getElementById('categories-grid');
+                grid.innerHTML = categories.map(cat => `
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer" onclick="filterResources(${cat.id})">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${cat.color} rounded-2xl flex items-center justify-center text-white text-2xl">
+                            <i class="fas ${cat.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-lg">${cat.name}</h3>
+                    </div>
+                `).join('');
                 
             } catch (error) {
-                console.error('Error loading data:', error);
-                document.getElementById('loading').innerHTML = '<p class="text-red-500">خطأ في تحميل البيانات</p>';
-            }
-        }
-
-        // Render Categories
-        function renderCategories(categories) {
-            const grid = document.getElementById('categories-grid');
-            
-            if (!categories || categories.length === 0) {
-                grid.innerHTML = '<div class="col-span-4 text-center text-gray-500">لا توجد تصنيفات</div>';
-                return;
-            }
-            
-            grid.innerHTML = categories.map(cat => `
-                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer" onclick="filterResources('${cat.id}')">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${cat.color} rounded-2xl flex items-center justify-center text-white text-2xl">
-                        <i class="fas ${cat.icon}"></i>
+                console.error('Error loading categories:', error);
+                // Use sample data on error
+                document.getElementById('categories-grid').innerHTML = sampleCategories.map(cat => `
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center shadow-lg">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${cat.color} rounded-2xl flex items-center justify-center text-white text-2xl">
+                            <i class="fas ${cat.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-lg">${cat.name}</h3>
                     </div>
-                    <h3 class="font-bold text-gray-900 dark:text-white text-lg">${cat.name}</h3>
-                </div>
-            `).join('');
-            
-            // Update filter buttons
-            const filterContainer = document.getElementById('filter-buttons');
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = 'filter-btn px-6 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700';
-                btn.textContent = cat.name;
-                btn.onclick = () => filterResources(cat.id);
-                filterContainer.appendChild(btn);
-            });
+                `).join('');
+            }
         }
 
-        // Render Resources
-        function renderResources(resources) {
-            const grid = document.getElementById('resources-grid');
-            
-            if (!resources || resources.length === 0) {
-                grid.innerHTML = '<div class="col-span-4 text-center text-gray-500">لا توجد مصادر</div>';
-                return;
-            }
-            
-            grid.innerHTML = resources.map(r => `
-                <div class="resource-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-center gap-4 mb-4">
-                        <img src="${r.icon || 'https://via.placeholder.com/48'}" alt="${r.name}" class="w-12 h-12 rounded-lg object-contain" onerror="this.src='https://via.placeholder.com/48'">
-                        <div>
-                            <h3 class="font-bold text-gray-900 dark:text-white">${r.name}</h3>
-                            <div class="text-yellow-500 text-sm">
-                                <i class="fas fa-star"></i> ${r.rating || '0'} 
-                                <span class="text-gray-400 mr-2">(${r.views || 0} زيارة)</span>
+        // Load Resources
+        async function loadResources(categoryId = 'all') {
+            try {
+                let resources;
+                
+                if (supabase) {
+                    let query = supabase.from('resources').select('*');
+                    if (categoryId !== 'all') {
+                        query = query.eq('category_id', categoryId);
+                    }
+                    const { data, error } = await query;
+                    if (!error && data && data.length > 0) {
+                        resources = data;
+                    } else {
+                        resources = categoryId === 'all' ? sampleResources : sampleResources.filter(r => r.category_id == categoryId);
+                    }
+                } else {
+                    resources = categoryId === 'all' ? sampleResources : sampleResources.filter(r => r.category_id == categoryId);
+                }
+                
+                const grid = document.getElementById('resources-grid');
+                grid.innerHTML = resources.map(r => `
+                    <div class="resource-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="${r.icon || 'https://via.placeholder.com/48'}" alt="${r.name}" class="w-12 h-12 rounded-lg object-contain" onerror="this.src='https://via.placeholder.com/48'">
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white">${r.name}</h3>
+                                <div class="text-yellow-500 text-sm">
+                                    <i class="fas fa-star"></i> ${r.rating || '0'} 
+                                    <span class="text-gray-400 mr-2">(${r.views || 0})</span>
+                                </div>
                             </div>
                         </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${r.description || ''}</p>
+                        <a href="${r.url}" target="_blank" class="block w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-center font-semibold hover:shadow-lg transition-all">
+                            زيارة الموقع <i class="fas fa-external-link-alt mr-2"></i>
+                        </a>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${r.description || ''}</p>
-                    <a href="${r.url}" target="_blank" onclick="window.db.incrementViews(${r.id})" class="block w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-center font-semibold hover:shadow-lg transition-all">
-                        زيارة الموقع <i class="fas fa-external-link-alt mr-2"></i>
-                    </a>
-                </div>
-            `).join('');
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading resources:', error);
+            }
         }
 
         // Filter Resources
-        async function filterResources(category) {
-            // Update active button
+        function filterResources(category) {
+            // Update buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active', 'bg-blue-600', 'text-white');
                 btn.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
@@ -224,12 +261,8 @@
             event.target.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
             event.target.classList.add('active', 'bg-blue-600', 'text-white');
             
-            // Show loading
-            document.getElementById('resources-grid').innerHTML = '<div class="col-span-4 text-center py-12"><div class="loading"></div></div>';
-            
             // Load filtered resources
-            const resources = await window.db.getResources(category);
-            renderResources(resources);
+            loadResources(category);
         }
 
         // Auth Modal
@@ -243,54 +276,26 @@
             document.getElementById('auth-modal').classList.remove('flex');
         }
 
-        async function handleLogin(e) {
+        function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
-            const result = await window.auth.signIn(email, password);
-            if (result) {
-                closeAuthModal();
-                updateUIForLoggedInUser(result.user);
-            }
+            alert('نظام تسجيل الدخول يحتاج إعداد Supabase Authentication');
+            closeAuthModal();
         }
-
-        function updateUIForLoggedInUser(user) {
-            document.getElementById('user-status').textContent = user.email;
-            document.getElementById('user-status').classList.remove('hidden');
-            document.getElementById('auth-btn').textContent = 'تسجيل الخروج';
-            document.getElementById('auth-btn').onclick = handleLogout;
-        }
-
-        async function handleLogout() {
-            await window.auth.signOut();
-            document.getElementById('user-status').classList.add('hidden');
-            document.getElementById('auth-btn').textContent = 'تسجيل الدخول';
-            document.getElementById('auth-btn').onclick = openAuthModal;
-        }
-
-        function showSignup() {
-            alert('نظام التسجيل يحتاج إعداد إضافي في Supabase Authentication');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in
-            window.auth.getCurrentUser().then(user => {
-                if (user) {
-                    updateUIForLoggedInUser(user);
-                }
-            });
-            
-            // Load data
-            loadData();
-        });
 
         // Close modal on outside click
         document.getElementById('auth-modal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('auth-modal')) {
                 closeAuthModal();
             }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            loadResources();
         });
     </script>
 </body>
