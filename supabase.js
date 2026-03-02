@@ -3,8 +3,8 @@
 // ==========================================
 
 // ⚠️ استبدل هذه القيم بمفاتيحك من ملف .env أو من Supabase Dashboard
-const SUPABASE_URL = 'https://your-project.supabase.co';  // ← استبدل هذا
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIs...';           // ← استبدل هذا
+const SUPABASE_URL = 'https://apjnwyvrcbpxiffsupew.supabase.co';  // ← استبدل هذا
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwam53eXZyY2JweGlmZnN1cGV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NTE3MzIsImV4cCI6MjA4ODAyNzczMn0.b8G0CmIZhkMvwmTckyE1dvo_xmsXK7pflCa2TK8uVIc';           // ← استبدل هذا
 
 // Initialize Supabase Client
 let supabase;
