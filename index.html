@@ -3,11 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniCompass — بوصلتك الجامعية</title>
-  <meta name="description" content="بوصلتك نحو النجاح الجامعي — أدوات الذكاء الاصطناعي والخطط الأكاديمية لطلاب جامعة السلطان قابوس وجميع الطلاب الجامعيين" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="data.js"></script>
+
+  <!-- ═══════════════════════════════════════════
+       PRIMARY META
+  ════════════════════════════════════════════ -->
+  <title>UniCompass — بوصلتك نحو النجاح الجامعي</title>
+  <meta name="description"        content="UniCompass — بوصلتك نحو النجاح الجامعي. أدوات الذكاء الاصطناعي، الخطط الأكاديمية، وخدمات طلاب جامعة السلطان قابوس في مكان واحد." />
+  <meta name="keywords"           content="UniCompass, unicompass.website, جامعة السلطان قابوس, SQU, أدوات ذكاء اصطناعي, خطط أكاديمية, طلاب, AI tools, university, Oman, عُمان" />
+  <meta name="author"             content="UniCompass" />
+  <meta name="robots"             content="index, follow" />
+  <meta name="theme-color"        content="#c9a84c" />
+  <meta name="color-scheme"       content="dark light" />
+  <link rel="canonical"           href="https://unicompass.website/" />
+
+  <!-- ═══════════════════════════════════════════
+       OPEN GRAPH (Facebook / WhatsApp / LinkedIn)
+  ════════════════════════════════════════════ -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://unicompass.website/" />
+  <meta property="og:site_name"   content="UniCompass" />
+  <meta property="og:title"       content="UniCompass — بوصلتك نحو النجاح الجامعي" />
+  <meta property="og:description" content="أدوات الذكاء الاصطناعي، الخطط الأكاديمية لجامعة السلطان قابوس، ومجتمع الطلاب — كل شيء في مكان واحد." />
+  <meta property="og:image"       content="https://unicompass.website/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height"content="630" />
+  <meta property="og:locale"      content="ar_OM" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- ═══════════════════════════════════════════
+       TWITTER CARD
+  ════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://unicompass.website/" />
+  <meta name="twitter:title"       content="UniCompass — بوصلتك نحو النجاح الجامعي" />
+  <meta name="twitter:description" content="أدوات الذكاء الاصطناعي والخطط الأكاديمية لطلاب جامعة السلطان قابوس وجميع الطلاب الجامعيين." />
+  <meta name="twitter:image"       content="https://unicompass.website/og-image.png" />
+
+  <!-- ═══════════════════════════════════════════
+       FAVICON — SVG emoji compass
+  ════════════════════════════════════════════ -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0f1e'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle' dy='0.1em'>🧭</text></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0f1e'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle' dy='0.1em'>🧭</text></svg>" />
+  <meta name="apple-mobile-web-app-title" content="UniCompass" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- ═══════════════════════════════════════════
+       PWA / MANIFEST
+  ════════════════════════════════════════════ -->
+  <meta name="application-name"   content="UniCompass" />
+  <meta name="msapplication-TileColor" content="#0a0f1e" />
+
+  <!-- ═══════════════════════════════════════════
+       STRUCTURED DATA (JSON-LD)
+  ════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "UniCompass",
+    "alternateName": "يونيكومباس",
+    "url": "https://unicompass.website/",
+    "description": "بوصلتك نحو النجاح الجامعي — أدوات الذكاء الاصطناعي والخطط الأكاديمية لطلاب جامعة السلطان قابوس",
+    "inLanguage": ["ar", "en"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://unicompass.website/#tools?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       PERFORMANCE — Preconnect & DNS prefetch
+  ════════════════════════════════════════════ -->
+  <link rel="preconnect"    href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect"    href="https://fonts.gstatic.com"    crossorigin />
+  <link rel="dns-prefetch"  href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch"  href="https://fonts.gstatic.com" />
+
+  <!-- Fonts: load only needed weights, add display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- data.js: defer so it doesn't block render -->
+  <script src="data.js" defer></script>
 
 <style>
 /* =====================================================
@@ -60,6 +139,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+/* Performance: prevent layout shifts */
+@font-face { font-display: swap; }
 
 body {
   font-family: var(--font-arabic);
@@ -445,7 +526,7 @@ nav {
   gap: 20px;
 }
 
-.tool-card {
+.tool-card, .major-card, .post-card, .squ-link-card {
   background: var(--bg-card);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
@@ -454,6 +535,8 @@ nav {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  will-change: transform;
+  contain: layout style;
 }
 
 .tool-card::before {
@@ -1262,11 +1345,15 @@ footer {
     <div class="footer-logo">🧭 UniCompass</div>
     <p class="footer-text" data-i18n="footer_text">UniCompass — صُنع بـ ❤️ لطلاب SQU وكل جامعي</p>
     <div class="footer-links">
-      <a href="#tools" data-i18n="nav_tools">أدوات الذكاء</a>
-      <a href="#academic" data-i18n="nav_academic">الخطط الأكاديمية</a>
-      <a href="#community" data-i18n="nav_community">المجتمع</a>
-      <a href="#squ" data-i18n="nav_squ">روابط SQU</a>
+      <a href="https://unicompass.website/#tools"    data-i18n="nav_tools">أدوات الذكاء</a>
+      <a href="https://unicompass.website/#academic" data-i18n="nav_academic">الخطط الأكاديمية</a>
+      <a href="https://unicompass.website/#community"data-i18n="nav_community">المجتمع</a>
+      <a href="https://unicompass.website/#squ"      data-i18n="nav_squ">روابط SQU</a>
     </div>
+    <p style="margin-top:16px;font-size:0.75rem;color:var(--text-muted)">
+      © 2025 <a href="https://unicompass.website/" style="color:var(--gold)">unicompass.website</a>
+      — جميع الحقوق محفوظة
+    </p>
   </div>
 </footer>
 
@@ -1294,9 +1381,9 @@ let activeCategory = 'all';
 let activeCollege = 0;
 
 // =====================================================
-//  INIT
+//  INIT — wait for both DOM and data.js
 // =====================================================
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   renderHeroStats();
   renderCategoryTabs();
   renderTools();
@@ -1307,7 +1394,16 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSQULinks();
   setupScrollSpy();
   setupBackToTop();
-});
+  // Performance mark
+  if (window.performance) performance.mark('unicompass-ready');
+}
+
+// data.js is deferred — guarantee both are ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 // =====================================================
 //  HERO STATS
